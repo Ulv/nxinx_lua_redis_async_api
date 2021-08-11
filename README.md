@@ -1,20 +1,20 @@
-# Async HTTP API built with Nginx (openresty lua module) + Redis 
+# Async HTTP API built with Nginx (openresty lua module) + Redis
 
 ## The idea
 
-1. Make request to API endpoint 
+1. Make request to API endpoint
 2. Request body goes to redis queue (for asynchronous processing)
 
 ## Usage
 
 1. Clone
 2. Run in project directory
- 
+
 ```shell
 > docker-compose up
 ```
 
-3. Generate API access token for client. Run redis-cli from redis container
+3. Generate API access token for client. Run redis-cli from the redis container
 
 ```
 > redis-cli
@@ -23,7 +23,9 @@ OK
 ```
 
 4. Make API requests
+
 4.1. Success
+
 ```shell
  curl -v --request POST 'http://luatest.loc:8080/api/v1/add' \
 --header 'API-Client-Id: 12345' \

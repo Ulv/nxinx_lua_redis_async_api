@@ -1,3 +1,5 @@
+local redisHost = '10.1.0.2' --os.getenv("REDIS_HOST")
+local redisPort = 6379 --os.getenv("REDIS_PORT")
 local apiKeyHeader = ngx.req.get_headers()["Authorization"] or ''
 local clientId = ngx.req.get_headers()["API-Client-Id"] or ''
 local token = apiKeyHeader:gsub("%Bearer ", ""):match'^%s*(.*%S)' or ''
@@ -13,7 +15,7 @@ then
     return ngx.exit(401)
 end
 
-local ok, err = red:connect("172.16.238.10", 6379)
+local ok, err = red:connect(redisHost, redisPort)
 
 if not ok then
     local errMsg = '{"status":"ERR", "msg":"Backend connect error"}'
